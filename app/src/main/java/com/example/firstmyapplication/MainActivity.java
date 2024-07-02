@@ -18,6 +18,8 @@ import com.example.firstmyapplication.UI.Star2;
 import com.example.firstmyapplication.UI.Star3;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     private void performCommonTask() {  // 공통 작업 수행
@@ -107,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
             ft.commit();
         }
     }
+
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.firstmyapplication.R;
@@ -37,8 +36,7 @@ public class Star2Fragment extends Fragment {
     }
 
     private void openDetailFragment() {
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame, new Star2DeltailFragment());
         transaction.addToBackStack(null);
         transaction.commit();
