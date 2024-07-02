@@ -90,27 +90,21 @@ public class MainActivity extends AppCompatActivity {
     private  void setFrag(int n) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
-        switch (n) {
-            case 0:
-                ft.replace(R.id.main_frame, Star1);
-                ft.commit();
-                break;
-            case 1:
-                ft.replace(R.id.main_frame, Star2);
-                ft.commit();
-                break;
-            case 2:
-                ft.replace(R.id.main_frame, Star3);
-                ft.commit();
-                break;
-            case 3:
-                ft.replace(R.id.main_frame, Share);
-                ft.commit();
-                break;
-            case 4:
-                ft.replace(R.id.main_frame, Health);
-                ft.commit();
-                break;
+        if (n == 0) {
+            ft.replace(R.id.main_frame, Star1);
+            ft.commit();
+        } else if (n == 1) {
+            ft.replace(R.id.main_frame, Star2);
+            ft.commit();
+        } else if (n == 2) {
+            ft.replace(R.id.main_frame, Star3);
+            ft.commit();
+        } else if (n == 3) {
+            ft.replace(R.id.main_frame, Share);
+            ft.commit();
+        } else if (n == 4) {
+            ft.replace(R.id.main_frame, Health);
+            ft.commit();
         }
     }
 }

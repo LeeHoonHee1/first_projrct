@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/pretendard_semibold" />
+    <!-- 필요에 따라 추가 폰트 스타일 및 웨이트를 정의할 수 있습니다 -->
+</font-family>
