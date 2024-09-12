@@ -15,24 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstmyapplication.R;
 
+
 public class Share extends Fragment {
 
     private SQLiteOpenHelper dbHelper;
     private SQLiteDatabase database;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
+    private Cursor cursor;  // Cursor를 멤버 변수로 선언하여 관리
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_share, container, false);
 
-        dbHelper = new DatabaseHelper(getActivity());
+        dbHelper = new DatabaseHelper(requireActivity());  // requireActivity()로 null 방지
         database = dbHelper.getReadableDatabase();
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        postAdapter = new PostAdapter(getActivity(), getPosts());
+        cursor = getPosts();
+        postAdapter = new PostAdapter(getActivity(), cursor);
         recyclerView.setAdapter(postAdapter);
 
         Button addPostButton = view.findViewById(R.id.addPostButton);
@@ -54,9 +57,19 @@ public class Share extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        postAdapter.swapCursor(getPosts());
+        cursor = getPosts();  // Cursor 업데이트
+        postAdapter.swapCursor(cursor);  // 업데이트된 Cursor 적용
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();  // Cursor 닫기
+        }
+        if (database != null && database.isOpen()) {
+            database.close();
+        }
+        dbHelper.close();
+    }
 }
-

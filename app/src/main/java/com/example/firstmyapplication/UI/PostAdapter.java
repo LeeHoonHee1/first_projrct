@@ -36,21 +36,39 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String content = cursor.getString(cursor.getColumnIndexOrThrow("content"));
 
-        holder.titleTextView.setText(title);
-        holder.contentTextView.setText(content);
+        if (!title.equals(holder.titleTextView.getText().toString())) {
+            holder.titleTextView.setText(title);
+        }
+
+        if (!content.equals(holder.contentTextView.getText().toString())) {
+            holder.contentTextView.setText(content);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return (cursor != null) ? cursor.getCount() : 0;
     }
 
     public void swapCursor(Cursor newCursor) {
-        if (cursor != null) {
+        if (cursor != null && !cursor.isClosed()) {
             cursor.close();
         }
         cursor = newCursor;
         notifyDataSetChanged();
+    }
+
+    // Cursor를 명시적으로 닫는 메서드
+    public void closeCursor() {
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        // 추가적인 리소스 해제가 필요한 경우 여기에 처리 가능
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,5 +82,3 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 }
-
-
