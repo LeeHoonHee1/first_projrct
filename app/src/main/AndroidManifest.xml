@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.Join_Activity" />
+        <activity android:name=".UI.AddPostActivity" />
+
     </application>
 
 </manifest>

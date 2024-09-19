@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.firstmyapplication.MainActivity;
 import com.example.firstmyapplication.R;
 
 public class AddPostActivity extends AppCompatActivity {
@@ -37,7 +36,6 @@ public class AddPostActivity extends AppCompatActivity {
                 String title = titleEditText.getText().toString();
                 String content = contentEditText.getText().toString();
 
-                // 입력 값이 비어 있는지 확인
                 if (TextUtils.isEmpty(title)) {
                     titleEditText.setError("Title is required");
                     return;
@@ -52,9 +50,8 @@ public class AddPostActivity extends AppCompatActivity {
                 values.put("content", content);
                 database.insert("posts", null, values);
 
-                // MainActivity로 이동
-                Intent intent = new Intent(AddPostActivity.this, MainActivity.class);
-                startActivity(intent);
+                // 결과를 돌려주고 AddPostActivity 종료
+                setResult(RESULT_OK);
                 finish();
             }
         });
@@ -63,9 +60,11 @@ public class AddPostActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 데이터베이스 연결 종료
         if (database != null && database.isOpen()) {
             database.close();
+        }
+        if (dbHelper != null) {
+            dbHelper.close();
         }
     }
 }

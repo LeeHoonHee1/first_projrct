@@ -9,12 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstmyapplication.R;
-
 
 public class Share extends Fragment {
 
@@ -22,13 +22,15 @@ public class Share extends Fragment {
     private SQLiteDatabase database;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
-    private Cursor cursor;  // Cursor를 멤버 변수로 선언하여 관리
+    private Cursor cursor;
+
+    private static final int ADD_POST_REQUEST_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_share, container, false);
 
-        dbHelper = new DatabaseHelper(requireActivity());  // requireActivity()로 null 방지
+        dbHelper = new DatabaseHelper(requireActivity());
         database = dbHelper.getReadableDatabase();
 
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -43,7 +45,7 @@ public class Share extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddPostActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_POST_REQUEST_CODE);  // AddPostActivity 호출
             }
         });
 
@@ -57,15 +59,26 @@ public class Share extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        cursor = getPosts();  // Cursor 업데이트
-        postAdapter.swapCursor(cursor);  // 업데이트된 Cursor 적용
+        cursor = getPosts();
+        postAdapter.swapCursor(cursor);  // 리스트 갱신
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_POST_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+            // 게시글을 추가한 후 리스트를 갱신
+            cursor = getPosts();
+            postAdapter.swapCursor(cursor);
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (cursor != null && !cursor.isClosed()) {
-            cursor.close();  // Cursor 닫기
+            cursor.close();
         }
         if (database != null && database.isOpen()) {
             database.close();
@@ -73,3 +86,4 @@ public class Share extends Fragment {
         dbHelper.close();
     }
 }
+
