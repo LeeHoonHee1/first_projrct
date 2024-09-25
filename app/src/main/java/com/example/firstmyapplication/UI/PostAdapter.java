@@ -1,10 +1,12 @@
 package com.example.firstmyapplication.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,11 +16,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Cursor cursor;
     private LayoutInflater inflater;
+    private OnItemActionListener listener;
 
-    // 생성자에 Context를 추가하여 초기화
-    public PostAdapter(Context context, Cursor cursor) {
+    // 인터페이스 정의: 수정 및 삭제 시 처리할 이벤트를 전달
+    public interface OnItemActionListener {
+        void onEdit(int id, String title, String content);  // 수정 시 호출
+        void onDelete(int id);  // 삭제 시 호출
+    }
+
+    // 생성자에 Context와 리스너를 추가하여 초기화
+    public PostAdapter(Context context, Cursor cursor, OnItemActionListener listener) {
         this.cursor = cursor;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @Override
@@ -33,16 +43,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             return;
         }
 
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String content = cursor.getString(cursor.getColumnIndexOrThrow("content"));
 
-        if (!title.equals(holder.titleTextView.getText().toString())) {
-            holder.titleTextView.setText(title);
-        }
+        holder.titleTextView.setText(title);
+        holder.contentTextView.setText(content);
 
-        if (!content.equals(holder.contentTextView.getText().toString())) {
-            holder.contentTextView.setText(content);
-        }
+        // 수정 버튼 클릭 이벤트 처리
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onEdit(id, title, content);
+            }
+        });
+
+        // 삭제 버튼 클릭 이벤트 처리
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDelete(id);
+            }
+        });
     }
 
     @Override
@@ -58,27 +80,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    // Cursor를 명시적으로 닫는 메서드
-    public void closeCursor() {
-        if (cursor != null && !cursor.isClosed()) {
-            cursor.close();
-        }
-    }
-
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
-        super.onViewRecycled(holder);
-        // 추가적인 리소스 해제가 필요한 경우 여기에 처리 가능
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView contentTextView;
+        Button editButton;
+        Button deleteButton;
 
         ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             contentTextView = itemView.findViewById(R.id.contentTextView);
+            editButton = itemView.findViewById(R.id.editButton);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
 }
+

@@ -1,6 +1,8 @@
 package com.example.firstmyapplication.UI;
 
-import android.content.Intent;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;  // Intent 추가
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,15 +10,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Button;  // Button 추가
+import android.widget.EditText;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstmyapplication.R;
 
-public class Share extends Fragment {
+public class Share extends Fragment implements PostAdapter.OnItemActionListener {
 
     private SQLiteOpenHelper dbHelper;
     private SQLiteDatabase database;
@@ -37,9 +41,10 @@ public class Share extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         cursor = getPosts();
-        postAdapter = new PostAdapter(getActivity(), cursor);
+        postAdapter = new PostAdapter(getActivity(), cursor, this);
         recyclerView.setAdapter(postAdapter);
 
+        // AddPostActivity로 이동하는 코드 추가
         Button addPostButton = view.findViewById(R.id.addPostButton);
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,21 +62,56 @@ public class Share extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        cursor = getPosts();
-        postAdapter.swapCursor(cursor);  // 리스트 갱신
+    public void onEdit(int id, String title, String content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setTitle("Edit Post");
+
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_edit_post, null);
+        EditText titleEditText = dialogView.findViewById(R.id.titleEditText);
+        EditText contentEditText = dialogView.findViewById(R.id.contentEditText);
+
+        titleEditText.setText(title);
+        contentEditText.setText(content);
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newTitle = titleEditText.getText().toString();
+                String newContent = contentEditText.getText().toString();
+
+                ContentValues values = new ContentValues();
+                values.put("title", newTitle);
+                values.put("content", newContent);
+
+                // 데이터베이스에서 해당 게시글 수정
+                database.update("posts", values, "id = ?", new String[]{String.valueOf(id)});
+                cursor = getPosts();
+                postAdapter.swapCursor(cursor);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        builder.create().show();
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ADD_POST_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
-            // 게시글을 추가한 후 리스트를 갱신
-            cursor = getPosts();
-            postAdapter.swapCursor(cursor);
-        }
+    public void onDelete(int id) {
+        new AlertDialog.Builder(requireActivity())
+                .setTitle("Delete Post")
+                .setMessage("이 게시물을 삭제하시겠습니까?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 데이터베이스에서 해당 게시글 삭제
+                        database.delete("posts", "id = ?", new String[]{String.valueOf(id)});
+                        cursor = getPosts();
+                        postAdapter.swapCursor(cursor);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .create()
+                .show();
     }
 
     @Override
@@ -85,5 +125,15 @@ public class Share extends Fragment {
         }
         dbHelper.close();
     }
-}
 
+    // AddPostActivity에서 돌아온 후 데이터 갱신
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_POST_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+            // 새 게시글 추가 후 데이터 갱신
+            cursor = getPosts();
+            postAdapter.swapCursor(cursor);
+        }
+    }
+}
