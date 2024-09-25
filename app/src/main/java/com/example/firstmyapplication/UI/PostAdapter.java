@@ -1,7 +1,6 @@
 package com.example.firstmyapplication.UI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +49,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.titleTextView.setText(title);
         holder.contentTextView.setText(content);
 
+        // 내용은 처음에는 숨김
+        holder.contentTextView.setVisibility(View.GONE);
+
+        // 제목 클릭 시 내용을 보이거나 숨기는 기능 추가
+        holder.titleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.contentTextView.getVisibility() == View.GONE) {
+                    holder.contentTextView.setVisibility(View.VISIBLE);  // 내용 보이기
+                } else {
+                    holder.contentTextView.setVisibility(View.GONE);  // 내용 숨기기
+                }
+            }
+        });
+
         // 수정 버튼 클릭 이벤트 처리
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,4 +109,3 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 }
-
