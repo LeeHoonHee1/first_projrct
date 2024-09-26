@@ -9,19 +9,19 @@
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title" />
+        android:hint="제목" />
 
     <EditText
         android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:layout_marginTop="8dp"
-        android:hint="Content" />
+        android:hint="레시피" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Save" />
+        android:text="저장" />
 </LinearLayout>
