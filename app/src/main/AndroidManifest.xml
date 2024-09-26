@@ -22,6 +22,10 @@
         </activity>
         <activity android:name=".Login.Join_Activity" />
         <activity android:name=".UI.AddPostActivity" />
+        <activity android:name=".UI.Yes_Activity" />
+        <activity android:name=".UI.No_Activity" />
+        <activity android:name=".UI.Yes_1_Activity" />
+        <activity android:name=".UI.Yes_2_Activity" />
 
     </application>
 
