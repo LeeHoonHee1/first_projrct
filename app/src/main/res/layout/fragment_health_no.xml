@@ -1,6 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-</RelativeLayout>
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="409dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:text="WPC:우유O WPI:우유X(유당불내증)"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="560dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_open_link2"
+                        android:layout_width="120dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/evl_whey_protein" />
+
+                    <ImageView
+                        android:id="@+id/image_open_link3"
+                        android:layout_width="120dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/evl_isolate_protein" />
+
+                    <LinearLayout
+                        android:layout_width="168dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:text="1.가격이 저렴하다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="2.잘 안 섞인다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="3.맛이 애매하다."
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_open_link4"
+                        android:layout_width="240dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/combat_whey" />
+
+                    <LinearLayout
+                        android:layout_width="168dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:text="1.WPC+WPI"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="2.약간 비싸다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="3.맛은 무난하다."
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_open_link5"
+                        android:layout_width="240dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/optimum_whey" />
+
+                    <LinearLayout
+                        android:layout_width="168dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:text="1.WPC+WPI"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="2.다소 비싸다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="3.밍밍함(깔끔함)."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="3.브랜드 벨류 높다."
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_open_link6"
+                        android:layout_width="120dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/syntha6_whey_protein" />
+
+                    <ImageView
+                        android:id="@+id/image_open_link7"
+                        android:layout_width="120dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/open_link"
+                        android:src="@drawable/syntha6_isolate_protein" />
+
+                    <LinearLayout
+                        android:layout_width="168dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:text="1.맛있다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="2.다소 비싸다."
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="3.섬유질 함량높음."
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
