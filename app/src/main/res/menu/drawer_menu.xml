@@ -10,10 +10,7 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/baseline_boy_24"
             android:title="프로필" />
-        <item
-            android:id="@+id/nav_school"
-            android:icon="@drawable/baseline_build_24"
-            android:title="학교정보" />
+
         <item
             android:id="@+id/nav_job"
             android:icon="@drawable/baseline_cookie_24"

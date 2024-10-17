@@ -34,7 +34,6 @@
         <activity android:name=".UI.Yes_2_Activity" />
         <activity android:name=".Drawer.JobInfo_Activity" />
         <activity android:name=".Drawer.Profile_Activity" />
-        <activity android:name=".Drawer.SchoolInfo_Activity" />
 
     </application>
 

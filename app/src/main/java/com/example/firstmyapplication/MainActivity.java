@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.firstmyapplication.Drawer.JobInfo_Activity;
 import com.example.firstmyapplication.Drawer.Profile_Activity;
-import com.example.firstmyapplication.Drawer.SchoolInfo_Activity;
 import com.example.firstmyapplication.Login.Login_Activity;
 import com.example.firstmyapplication.UI.Health;
 import com.example.firstmyapplication.UI.Share;
@@ -73,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_profile:
                         intent = new Intent(MainActivity.this, Profile_Activity.class); // 예시 클래스, 실제 클래스로 변경 필요
-                        startActivity(intent);
-                        break;
-
-                    case R.id.nav_school: // nav_profile이라는 id를 가진 메뉴 항목에 대한 처리
-                        intent = new Intent(MainActivity.this, SchoolInfo_Activity.class);
                         startActivity(intent);
                         break;
 
