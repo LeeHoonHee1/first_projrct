@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/> <!-- Android 9 이하에서만 사용 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -26,6 +32,9 @@
         <activity android:name=".UI.No_Activity" />
         <activity android:name=".UI.Yes_1_Activity" />
         <activity android:name=".UI.Yes_2_Activity" />
+        <activity android:name=".Drawer.JobInfo_Activity" />
+        <activity android:name=".Drawer.Profile_Activity" />
+        <activity android:name=".Drawer.SchoolInfo_Activity" />
 
     </application>
 
