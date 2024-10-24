@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.firstmyapplication.Drawer.JobInfo_Activity;
+import com.example.firstmyapplication.Drawer.Calorie_Activity;
 import com.example.firstmyapplication.Drawer.Profile_Activity;
 import com.example.firstmyapplication.Login.Login_Activity;
 import com.example.firstmyapplication.UI.Health;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_job:
-                        intent = new Intent(MainActivity.this, JobInfo_Activity.class);
+                        intent = new Intent(MainActivity.this, Calorie_Activity.class);
                         startActivity(intent);
                         break;
 

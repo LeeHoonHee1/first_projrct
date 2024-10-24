@@ -32,7 +32,7 @@
         <activity android:name=".UI.No_Activity" />
         <activity android:name=".UI.Yes_1_Activity" />
         <activity android:name=".UI.Yes_2_Activity" />
-        <activity android:name=".Drawer.JobInfo_Activity" />
+        <activity android:name=".Drawer.Calorie_Activity" />
         <activity android:name=".Drawer.Profile_Activity" />
 
     </application>
